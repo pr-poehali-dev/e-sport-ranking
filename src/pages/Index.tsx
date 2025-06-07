@@ -1,11 +1,15 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import RankingHeader from "@/components/RankingHeader";
+import RankingTabs from "@/components/RankingTabs";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState("players");
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="container mx-auto px-4 py-8">
+        <RankingHeader />
+        <RankingTabs activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
     </div>
   );
