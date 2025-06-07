@@ -18,8 +18,9 @@ const RankingHeader = () => {
 
       <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
         <Gamepad2 className="w-4 h-4" />
-        <span>Проект создан с помощью</span>
+        <span>Проект создан</span>
         <span className="text-purple-400 font-semibold">TG Rosters</span>
+        <span>и набранной комиссии</span>
       </div>
     </div>
   );
