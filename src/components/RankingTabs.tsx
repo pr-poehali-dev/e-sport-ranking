@@ -1,41 +1,35 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import PlayerRankingTable from "@/components/PlayerRankingTable";
-import TeamRankingTable from "@/components/TeamRankingTable";
-import { User, Users } from "lucide-react";
+import PlayerRankingTable from "./PlayerRankingTable";
+import TeamRankingTable from "./TeamRankingTable";
 
 interface RankingTabsProps {
   activeTab: string;
-  onTabChange: (tab: string) => void;
+  onTabChange: (value: string) => void;
+  isAdmin: boolean;
 }
 
-const RankingTabs = ({ activeTab, onTabChange }: RankingTabsProps) => {
+const RankingTabs = ({ activeTab, onTabChange, isAdmin }: RankingTabsProps) => {
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
-      <div className="flex justify-center mb-8">
-        <TabsList className="bg-slate-800 border border-slate-700">
-          <TabsTrigger
-            value="players"
-            className="flex items-center gap-2 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
-          >
-            <User className="w-4 h-4" />
-            Игроки
-          </TabsTrigger>
-          <TabsTrigger
-            value="teams"
-            className="flex items-center gap-2 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
-          >
-            <Users className="w-4 h-4" />
-            Команды
-          </TabsTrigger>
-        </TabsList>
-      </div>
-
-      <TabsContent value="players" className="animate-fade-in">
-        <PlayerRankingTable />
+      <TabsList className="grid w-full grid-cols-2 bg-slate-800 border-slate-700">
+        <TabsTrigger
+          value="players"
+          className="text-gray-300 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+        >
+          Игроки
+        </TabsTrigger>
+        <TabsTrigger
+          value="teams"
+          className="text-gray-300 data-[state=active]:bg-purple-600 data-[state=active]:text-white"
+        >
+          Команды
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="players" className="mt-6">
+        <PlayerRankingTable isAdmin={isAdmin} />
       </TabsContent>
-
-      <TabsContent value="teams" className="animate-fade-in">
-        <TeamRankingTable />
+      <TabsContent value="teams" className="mt-6">
+        <TeamRankingTable isAdmin={isAdmin} />
       </TabsContent>
     </Tabs>
   );

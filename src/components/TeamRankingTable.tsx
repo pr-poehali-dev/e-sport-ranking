@@ -37,7 +37,11 @@ const initialTeams = [
   "Timbaumba",
 ];
 
-const TeamRankingTable = () => {
+interface TeamRankingTableProps {
+  isAdmin: boolean;
+}
+
+const TeamRankingTable = ({ isAdmin }: TeamRankingTableProps) => {
   const [teams, setTeams] = useState(initialTeams);
 
   const moveTeam = (index: number, direction: "up" | "down") => {
@@ -67,9 +71,11 @@ const TeamRankingTable = () => {
             <TableRow className="border-slate-700 hover:bg-slate-750">
               <TableHead className="text-gray-300 w-20">Место</TableHead>
               <TableHead className="text-gray-300">Название команды</TableHead>
-              <TableHead className="text-gray-300 w-32 text-center">
-                Действия
-              </TableHead>
+              {isAdmin && (
+                <TableHead className="text-gray-300 w-32 text-center">
+                  Действия
+                </TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -94,28 +100,30 @@ const TeamRankingTable = () => {
                   </div>
                 </TableCell>
                 <TableCell className="text-white font-medium">{team}</TableCell>
-                <TableCell>
-                  <div className="flex items-center justify-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => moveTeam(index, "up")}
-                      disabled={index === 0}
-                      className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-slate-700"
-                    >
-                      <ChevronUp className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => moveTeam(index, "down")}
-                      disabled={index === teams.length - 1}
-                      className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-slate-700"
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </TableCell>
+                {isAdmin && (
+                  <TableCell>
+                    <div className="flex items-center justify-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => moveTeam(index, "up")}
+                        disabled={index === 0}
+                        className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-slate-700"
+                      >
+                        <ChevronUp className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => moveTeam(index, "down")}
+                        disabled={index === teams.length - 1}
+                        className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-slate-700"
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                )}
               </TableRow>
             ))}
           </TableBody>
